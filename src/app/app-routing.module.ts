@@ -4,53 +4,70 @@ import { NordigenGuard } from './common/nordigen/nordigen.guard';
 import { NordigenResolver } from './common/nordigen/nordigen.resolver';
 import { CookieBannerResolver } from './core/cookie-banner/cookie-banner.resolver';
 import { RootLayoutComponent } from './core/root-layout/root-layout.component';
-import { HomeGuard } from './features/home/home.guard';
+import { HasNoSecretGuard } from './features/home/home.guard';
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'prefix',
     component: RootLayoutComponent,
     children: [
-      // Unauthenticated
+      // routes with cookie banner
       {
         path: '',
-        title: 'Freekonomics',
-        pathMatch: 'full',
-        canActivate: [HomeGuard],
         resolve: { _: CookieBannerResolver },
-        loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule),
+        children: [
+          // Unauthenticated
+          {
+            path: '',
+            canActivate: [HasNoSecretGuard],
+            children: [
+              {
+                path: '',
+                title: 'Freekonomics',
+                pathMatch: 'full',
+                loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule),
+              },
+              {
+                path: 'setup',
+                title: 'Setup - Freekonomics',
+                loadChildren: () => import('./features/setup/setup.module').then((m) => m.SetupModule),
+              },
+            ],
+          },
+
+          // Authenticated
+          {
+            path: '',
+            canActivate: [NordigenGuard],
+            resolve: { _: NordigenResolver },
+            children: [
+              {
+                path: 'dashboard',
+                title: 'My dashboard - Freekonomics',
+                loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule),
+              },
+              {
+                path: 'settings',
+                title: 'Settings - Freekonomics',
+                loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule),
+              },
+            ],
+          },
+        ],
       },
-      {
-        path: 'setup',
-        title: 'Setup - Freekonomics',
-        pathMatch: 'prefix',
-        resolve: { _: CookieBannerResolver },
-        loadChildren: () => import('./features/setup/setup.module').then((m) => m.SetupModule),
-      },
+
+      // public routes without cookie banner
       {
         path: 'privacy',
         title: 'Privacy policy - Freekonomics',
-        pathMatch: 'prefix',
         loadChildren: () =>
           import('./features/privacy-policy/privacy-policy.module').then((m) => m.PrivacyPolicyModule),
       },
-
-      // Authenticated
       {
-        path: 'dashboard',
-        title: 'My dashboard - Freekonomics',
-        pathMatch: 'prefix',
-        canActivate: [NordigenGuard],
-        resolve: { _: CookieBannerResolver, __: NordigenResolver },
-        loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule),
-      },
-      {
-        path: 'settings',
-        title: 'Settings - Freekonomics',
-        pathMatch: 'prefix',
-        canActivate: [NordigenGuard],
-        resolve: { _: CookieBannerResolver, __: NordigenResolver },
-        loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule),
+        path: 'terms',
+        title: 'Terms of service - Freekonomics',
+        loadChildren: () =>
+          import('./features/terms-of-service/terms-of-service.module').then((m) => m.TermsOfServiceModule),
       },
     ],
   },

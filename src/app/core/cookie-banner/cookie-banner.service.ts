@@ -13,8 +13,9 @@ export class CookieBannerService {
     if (this.isCookieBannerShown) return;
 
     this.matDialog.open(CookieBannerComponent, {
-      disableClose: true,
-      width: '400px',
+      width: '100%',
+      maxWidth: '500px',
+      panelClass: 'cookie-banner',
     });
   }
 

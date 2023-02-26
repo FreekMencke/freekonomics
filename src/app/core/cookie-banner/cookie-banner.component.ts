@@ -9,8 +9,8 @@ import { CookieBannerService } from './cookie-banner.service';
     <div class="p--m">
       <h2 class="text-align--center">Cookies</h2>
       <p>
-        We use both essential and analytical cookies on Freekonomics. Accepting our analytical cookies helps us improve
-        Freekonomics.
+        We use both essential and anonymous analytical cookies on Freekonomics. Accepting our analytical cookies helps
+        us improve the web application.
       </p>
       <p>
         For more information, please see our

@@ -5,7 +5,7 @@ import { NordigenAuthenticationService } from 'src/app/common/nordigen/nordigen-
 @Injectable({
   providedIn: 'root',
 })
-export class HomeGuard implements CanActivate {
+export class HasNoSecretGuard implements CanActivate {
   constructor(private nordigenAuthenticationService: NordigenAuthenticationService, private router: Router) {}
 
   canActivate(): boolean | UrlTree {
