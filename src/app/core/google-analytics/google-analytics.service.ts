@@ -54,11 +54,15 @@ export class GoogleAnalyticsService {
     // Add gtag script
     const gtagInitScript = document.createElement('script');
     gtagInitScript.innerHTML = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag() { dataLayer.push(arguments); }
-          gtag('js', new Date());
-          gtag('config', '${environment.googleAnalyticsID}', { send_page_view: false, debug_mode: !${environment.production} });
-        `;
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag(
+        'config',
+        '${environment.googleAnalyticsID}',
+        { send_page_view: false, debug_mode: ${!environment.production} }
+      );
+    `;
     document.head.appendChild(gtagInitScript);
   }
 
