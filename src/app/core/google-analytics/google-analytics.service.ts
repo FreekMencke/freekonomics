@@ -56,14 +56,15 @@ export class GoogleAnalyticsService {
     gtagInitScript.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag(
-        'config',
-        '${environment.googleAnalyticsID}',
-        { send_page_view: false, debug_mode: ${!environment.production} }
-      );
     `;
     document.head.appendChild(gtagInitScript);
+
+    // Init gtag with config
+    gtag('js', new Date());
+    gtag('config', environment.googleAnalyticsID, {
+      send_page_view: false,
+      ...(environment.production ? {} : { debug_mode: true }),
+    });
   }
 
   private setupPageAnalytics() {
