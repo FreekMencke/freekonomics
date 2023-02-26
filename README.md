@@ -1,3 +1,7 @@
+[![CI](https://github.com/FreekMencke/freekonomics/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/FreekMencke/freekonomics/actions/workflows/continuous-integration.yml)
+[![GitHub issues](https://img.shields.io/github/issues/FreekMencke/freekonomics.svg)](https://github.com/FreekMencke/freekonomics/issues)
+[![GitHub license](https://img.shields.io/github/license/FreekMencke/freekonomics.svg)](https://github.com/FreekMencke/freekonomics/blob/master/LICENSE)
+
 # Freekonomics
 
 Freekonomics is a web application that helps you keep track of your personal finances. It is built with Angular and uses
