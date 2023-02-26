@@ -1,0 +1,33 @@
+.home-content {
+  gap: 64px;
+  margin: 128px 0;
+
+  @media (max-width: 599px) {
+    margin: 64px 0;
+  }
+
+  &:nth-child(even) {
+    flex-wrap: wrap-reverse;
+  }
+
+  &:last-child {
+    margin-bottom: 64px;
+    @media (max-width: 599px) {
+      margin-bottom: 32px;
+    }
+  }
+
+  .home-content__block {
+    min-width: 300px;
+
+    mat-icon {
+      height: auto;
+      width: 100%;
+      font-size: 192px;
+
+      @media (max-width: 599px) {
+        font-size: 128px;
+      }
+    }
+  }
+}

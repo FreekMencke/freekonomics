@@ -1,0 +1,49 @@
+<div class="flex flex-align--center flex-justify--space-between">
+  <div mat-dialog-title>Mortgage {{ mortgage.description }}</div>
+  <button
+    mat-icon-button
+    (click)="close()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div
+  mat-dialog-content
+  class="flex flex--column"
+>
+  <div class="flex mb--m">
+    <div class="flex flex--column flex--grow">
+      <div>Principal:</div>
+      <div>Interest:</div>
+      <div>Duration:</div>
+      <div>First payment:</div>
+    </div>
+    <div class="text-align--right">
+      <div>{{ mortgage.principal | number : '1.2-2' }} EUR</div>
+      <div>{{ mortgage.yearlyInterest | number : '1.2-2' }}% ({{ mortgage.monthlyInterest | number : '1.4-4' }}%)</div>
+      <div>
+        <span>{{ (mortgage.durationInMonths - (mortgage.durationInMonths % 12)) / 12 }} years</span>
+        <span *ngIf="mortgage.durationInMonths % 12">{{ mortgage.durationInMonths % 12 }} months</span>
+      </div>
+      <div>{{ mortgage.firstPaymentDate | date }}</div>
+    </div>
+  </div>
+
+  <div class="flex mb--l">
+    <div class="flex flex--column flex--grow">
+      <div>Principal balance:</div>
+      <div>Principal paid:</div>
+      <div>Interest paid:</div>
+    </div>
+    <div class="text-align--right">
+      <div>{{ mortgage.paymentStatus.principalBalance.toNumber() | number : '1.2-2' }} EUR</div>
+      <div>{{ mortgage.paymentStatus.principalPaid.toNumber() | number : '1.2-2' }} EUR</div>
+      <div>{{ mortgage.paymentStatus.interestTotal.toNumber() | number : '1.2-2' }} EUR</div>
+    </div>
+  </div>
+
+  <div class="text-align--center mat-caption">
+    Financial instutions use different ways to round their decimals, so the amount might be off a few cents.
+  </div>
+</div>

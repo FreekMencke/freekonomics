@@ -1,0 +1,53 @@
+@use '../variables/spacing';
+
+@each $size, $value in spacing.$size {
+  .flex--gap-#{$size} {
+    gap: #{$value};
+  }
+
+  .m--#{$size} {
+    margin: #{$value} !important;
+  }
+
+  .p--#{$size} {
+    padding: #{$value} !important;
+  }
+
+  .mx--#{$size} {
+    margin-left: #{$value} !important;
+    margin-right: #{$value} !important;
+  }
+
+  .px--#{$size} {
+    padding-left: #{$value} !important;
+    padding-right: #{$value} !important;
+  }
+
+  .my--#{$size} {
+    margin-top: #{$value} !important;
+    margin-bottom: #{$value} !important;
+  }
+
+  .py--#{$size} {
+    padding-top: #{$value} !important;
+    padding-bottom: #{$value} !important;
+  }
+
+  @each $side in spacing.$sides {
+    .m#{str-slice($side, 0, 1)}--#{$size} {
+      margin-#{$side}: #{$value} !important;
+    }
+
+    .p#{str-slice($side, 0, 1)}--#{$size} {
+      padding-#{$side}: #{$value} !important;
+    }
+  }
+}
+
+.flush-height {
+  height: 100%;
+}
+
+.flush-width {
+  width: 100%;
+}

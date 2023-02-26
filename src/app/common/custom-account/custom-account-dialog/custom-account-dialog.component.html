@@ -1,0 +1,92 @@
+<div mat-dialog-title>Custom account</div>
+
+<form
+  [formGroup]="form"
+  autocomplete="off"
+>
+  <div
+    mat-dialog-content
+    class="flex flex--column pb--s"
+  >
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Iban</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="iban"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Country</mat-label>
+      <mat-select formControlName="country">
+        <mat-option
+          *ngFor="let country of countries | async"
+          [value]="country"
+        >
+          <span [ngClass]="'fi fi-' + country.toLocaleLowerCase()"></span>
+          <span class="ml--s">{{ getCountryName(country) }}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      *ngIf="this.form.value.country"
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Institution</mat-label>
+      <mat-select formControlName="institution_id">
+        <mat-option
+          *ngFor="let institution of getCountryInstitutions(this.form.value.country) | async"
+          [value]="institution.id"
+          >{{ institution.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Balance</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="balance"
+      />
+      <span
+        matSuffix
+        class="mr--m"
+        >EUR</span
+      >
+    </mat-form-field>
+  </div>
+
+  <div
+    mat-dialog-actions
+    align="end"
+  >
+    <button
+      type="button"
+      mat-flat-button
+      color="transparent"
+      (click)="close()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="createOrUpdate()"
+    >
+      {{ this.customAccount ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form>

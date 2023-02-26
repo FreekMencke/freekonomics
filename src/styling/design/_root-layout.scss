@@ -1,0 +1,73 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../variables/theme';
+@use '../variables/spacing';
+
+$header-height: 64px;
+$header-height--mobile: 56px;
+
+root-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  mat-toolbar {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+
+    .brand-logo {
+      font-size: 20px;
+      img {
+        max-height: 28px;
+      }
+    }
+
+    a.active,
+    button.active {
+      background: rgba(0, 0, 0, 0.2) !important;
+      mat-icon {
+        color: inherit !important;
+      }
+    }
+  }
+
+  mat-sidenav-container {
+    mat-sidenav {
+      min-width: 300px;
+      top: $header-height !important;
+    }
+
+    padding-top: $header-height;
+    @media (max-width: 599px) {
+      padding-top: $header-height--mobile;
+
+      mat-sidenav {
+        top: $header-height--mobile !important;
+      }
+    }
+
+    main {
+      padding: map-get(spacing.$size, 'm');
+      margin-bottom: map-get(spacing.$size, 'xl');
+    }
+  }
+
+  footer {
+    margin-top: map.get(spacing.$size, 'auto');
+
+    // .footer__links {
+    //   background-color: darken(mat.get-color-from-palette(theme.$primary-palette, 500), 10%);
+    //   color: mat.get-contrast-color-from-palette(theme.$primary-palette, 500);
+
+    //   padding: map-get(spacing.$size,  'm');
+    // }
+
+    .footer__copyright {
+      background-color: mat.get-color-from-palette(theme.$primary-palette, 500);
+      color: mat.get-contrast-color-from-palette(theme.$primary-palette, 500);
+
+      padding: map-get(spacing.$size, 'm');
+    }
+  }
+}

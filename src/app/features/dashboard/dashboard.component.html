@@ -1,0 +1,183 @@
+<header class="jumbotron">
+  <div class="text-align--center my--l">
+    <div class="mb--s mat-headline-6">Total balance</div>
+    <div
+      class="m--none mat-headline-2"
+      [class.mat-headline-3]="isMobile | async"
+      style="font-weight: 300"
+    >
+      {{ totalBalance | async | number : '1.2-2' | privacy }}&nbsp;EUR
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="container__layout">
+    <div class="col-2">
+      <section>
+        <header>
+          <h2 class="m--none flex--grow">Linked accounts:</h2>
+
+          <mat-spinner
+            *ngIf="nordigenBalancesLoading | async"
+            [diameter]="24"
+            class="m--s"
+          ></mat-spinner>
+          <button
+            *ngIf="(nordigenBalancesLoading | async) === false"
+            mat-icon-button
+            (click)="reloadBalances()"
+            aria-label="refresh"
+          >
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </header>
+
+        <div
+          cdkDropList
+          (cdkDropListDropped)="updateNordingenAccountsOrder($event)"
+        >
+          <div
+            class="mb--m"
+            *ngIf="!(nordigenAccounts | async)?.length"
+          >
+            No linked accounts yet. Go to <a routerLink="settings">Settings</a> to link your accounts.
+          </div>
+
+          <account-item
+            [institution_id]="account.institution_id"
+            *ngFor="let account of nordigenAccounts | async; trackBy: trackById"
+            cdkDrag
+            cdkDragBoundary=".cdk-drop-list"
+            cdkDragLockAxis="y"
+          >
+            <mat-icon
+              account-item-icon
+              cdkDragHandle
+              >drag_indicator</mat-icon
+            >
+            <div account-item-title>
+              <ng-template
+                [ngIf]="(getBalanceAmount(account) | async)?.amount !== 'error'"
+                [ngIfElse]="error"
+              >
+                {{ ((getBalanceAmount(account) | async)?.amount | number : '1.2-2' | privacy) || 'loading...' }}&ngsp;{{
+                  (getBalanceAmount(account) | async)?.currency
+                }}
+              </ng-template>
+              <ng-template #error>
+                <mat-icon
+                  class="mr--xs"
+                  inline="true"
+                  color="error"
+                  >warning</mat-icon
+                >
+                ERROR
+              </ng-template>
+            </div>
+            <div
+              account-item-subtitle
+              class="text-ellipsis"
+            >
+              {{ account.iban | formatIban }}
+            </div>
+            <div account-item-actions>
+              <button
+                mat-icon-button
+                (click)="openTransactionsDialog(account)"
+                aria-label="transactions"
+              >
+                <mat-icon>receipt_long</mat-icon>
+              </button>
+            </div>
+          </account-item>
+        </div>
+      </section>
+    </div>
+
+    <div class="col-2">
+      <section *ngIf="(customAccounts | async)?.length">
+        <header>
+          <h2 class="mb--none">Custom accounts:</h2>
+        </header>
+
+        <div
+          cdkDropList
+          (cdkDropListDropped)="updateCustomAccountsOrder($event)"
+        >
+          <account-item
+            [institution_id]="customAccount.institution_id"
+            *ngFor="let customAccount of customAccounts | async; trackBy: trackById"
+            cdkDrag
+            cdkDragBoundary=".cdk-drop-list"
+            cdkDragLockAxis="y"
+          >
+            <mat-icon
+              account-item-icon
+              cdkDragHandle
+              >drag_indicator</mat-icon
+            >
+            <div account-item-title>{{ customAccount.balance | number : '1.2-2' | privacy }}&nbsp;EUR</div>
+            <div
+              account-item-subtitle
+              class="text-ellipsis"
+            >
+              {{ customAccount.iban | formatIban }}
+            </div>
+            <div account-item-actions>
+              <button
+                mat-icon-button
+                (click)="updateCustomAccount(customAccount)"
+                aria-label="edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </account-item>
+        </div>
+      </section>
+
+      <section *ngIf="(mortgages | async)?.length">
+        <header>
+          <h2 class="mb--none">Mortgages</h2>
+        </header>
+
+        <div
+          cdkDropList
+          (cdkDropListDropped)="updateMortgageOrder($event)"
+        >
+          <account-item
+            *ngFor="let mortgage of mortgages | async; trackBy: trackById"
+            cdkDrag
+            cdkDragBoundary=".cdk-drop-list"
+            cdkDragLockAxis="y"
+          >
+            <mat-icon
+              account-item-icon
+              cdkDragHandle
+              >drag_indicator</mat-icon
+            >
+            <div account-item-title>
+              {{ mortgage.paymentStatus.principalPaid.toNumber() | number : '1.2-2' | privacy }}&nbsp;EUR
+            </div>
+            <div
+              account-item-subtitle
+              class="text-ellipsis"
+            >
+              {{ mortgage.description }}
+            </div>
+            <div account-item-actions>
+              <button
+                mat-icon-button
+                (click)="openMortgageDetailDialog(mortgage)"
+                aria-label="details"
+              >
+                <mat-icon>request_page</mat-icon>
+              </button>
+            </div>
+          </account-item>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

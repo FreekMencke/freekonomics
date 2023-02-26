@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../variables/theme';
+
+.text-align--center {
+  text-align: center !important;
+}
+.text-align--right {
+  text-align: right !important;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a {
+  color: mat.get-color-from-palette(theme.$primary-palette, 100);
+  &:hover,
+  &:visited {
+    color: mat.get-color-from-palette(theme.$primary-palette, 200);
+  }
+  &:active,
+  &:focus {
+    color: mat.get-color-from-palette(theme.$primary-palette, 300);
+  }
+}

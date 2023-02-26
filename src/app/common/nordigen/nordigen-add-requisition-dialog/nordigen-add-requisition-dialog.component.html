@@ -1,0 +1,57 @@
+<div class="flex flex-align--center flex-justify--space-between">
+  <div mat-dialog-title>Add requisition</div>
+  <button
+    mat-icon-button
+    (click)="dialogRef.close()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div
+  mat-dialog-content
+  class="py--none"
+  *ngIf="!selectedCountry"
+>
+  <mat-selection-list
+    [multiple]="false"
+    (selectionChange)="selectedCountry = $event.options[0].value"
+  >
+    <div mat-subheader>Countries</div>
+    <mat-list-option
+      *ngFor="let country of countries | async"
+      [value]="country"
+    >
+      <div mat-line>
+        <span [ngClass]="'fi fi-' + country.toLocaleLowerCase()"></span>
+        <span class="ml--m">{{ getCountryName(country) }}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+
+<div
+  mat-dialog-content
+  class="py--none"
+  *ngIf="selectedCountry"
+>
+  <mat-selection-list [multiple]="false">
+    <div mat-subheader>Institutions</div>
+    <mat-list-option
+      *ngFor="let institution of getCountryInstitutions() | async"
+      [value]="institution.id"
+      (selectedChange)="addRequisition(institution.id)"
+    >
+      <div
+        mat-line
+        class="flex flex-align--center"
+      >
+        <div
+          class="mr--m bank-logo"
+          [ngStyle]="{ 'background-image': 'url(' + institution.logo + ')' }"
+        ></div>
+        {{ institution.name }}
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>

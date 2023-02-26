@@ -1,0 +1,210 @@
+<header class="jumbotron">
+  <div class="container">
+    <h1 class="my--m mat-headline-4">Settings</h1>
+  </div>
+</header>
+
+<div class="container">
+  <div class="container__layout">
+    <div class="col-2">
+      <section>
+        <header>
+          <h2 class="mb--none flex--grow">Custom accounts</h2>
+
+          <button
+            mat-button
+            (click)="addCustomAccount()"
+          >
+            Add custom account
+          </button>
+        </header>
+
+        <div
+          class="mb--m"
+          *ngIf="!(customAccounts | async)?.length"
+        >
+          No custom account added yet.
+        </div>
+
+        <account-item
+          [institution_id]="customAccount.institution_id"
+          *ngFor="let customAccount of customAccounts | async; trackBy: trackById"
+        >
+          <div account-item-title>{{ customAccount.balance | number : '1.2-2' | privacy }}&nbsp;EUR</div>
+          <div
+            account-item-subtitle
+            class="text-ellipsis"
+          >
+            {{ customAccount.iban | formatIban }}
+          </div>
+          <div account-item-actions>
+            <button
+              mat-icon-button
+              (click)="updateCustomAccount(customAccount)"
+              aria-label="edit"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="removeCustomAccount(customAccount.id)"
+              aria-label="delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </account-item>
+      </section>
+
+      <section>
+        <header>
+          <h2 class="mb--none flex--grow">Mortgages</h2>
+
+          <button
+            mat-button
+            (click)="addMortgage()"
+          >
+            Add mortgage
+          </button>
+        </header>
+
+        <div
+          class="mb--m"
+          *ngIf="!(mortgages | async)?.length"
+        >
+          No mortgage added yet.
+        </div>
+
+        <account-item *ngFor="let mortgage of mortgages | async; trackBy: trackById">
+          <div account-item-title>
+            {{ mortgage.paymentStatus.principalPaid.toNumber() | number : '1.2-2' | privacy }}&nbsp;EUR
+          </div>
+          <div
+            account-item-subtitle
+            class="text-ellipsis"
+          >
+            {{ mortgage.description }}
+          </div>
+          <div account-item-actions>
+            <button
+              mat-icon-button
+              (click)="updateMortgage(mortgage)"
+              aria-label="edit"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="removeMortgage(mortgage.id)"
+              aria-label="delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </account-item>
+      </section>
+    </div>
+
+    <div class="col-2">
+      <section>
+        <header>
+          <h2 class="mb--none flex--grow">Requisitions</h2>
+
+          <button
+            mat-button
+            (click)="addRequisition()"
+          >
+            Add requisition
+          </button>
+          <mat-spinner
+            *ngIf="requisitionsLoading | async"
+            [diameter]="24"
+            class="m--s"
+          ></mat-spinner>
+          <button
+            *ngIf="(requisitionsLoading | async) === false"
+            mat-icon-button
+            (click)="reloadRequisitions()"
+            aria-label="refresh"
+          >
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </header>
+
+        <div
+          class="mb--m"
+          *ngIf="!(requisitions | async)?.length"
+        >
+          No requisition added yet.
+        </div>
+
+        <mat-card
+          *ngFor="let requisition of requisitions | async; trackBy: trackById; let last = last"
+          [ngClass]="{ 'mb--m': !last }"
+        >
+          <mat-card-header>
+            <mat-card-title>{{ requisition.institution_id.split('_')[0] }}</mat-card-title>
+            <mat-card-subtitle>{{ RequisitionStatus[requisition.status] }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content
+            class="mt--s"
+            *ngIf="requisition.accounts.length"
+          >
+            <div>Accounts:</div>
+            <div *ngFor="let account of getNordigenAccounts(requisition.accounts) | async">
+              {{ account.iban | formatIban }}
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="flex">
+            <button
+              mat-button
+              (click)="refreshRequisition(requisition.link)"
+            >
+              Reconnect
+            </button>
+            <button
+              mat-button
+              color="warn"
+              (click)="deleteRequisition(requisition.id)"
+            >
+              Delete
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </section>
+
+      <section>
+        <header>
+          <h2 class="mb--none">Secret</h2>
+
+          <div class="flex--grow"></div>
+
+          <button
+            mat-button
+            color="warn"
+            (click)="deleteSecret(secretForm)"
+          >
+            Delete secret
+          </button>
+        </header>
+
+        <nordigen-secret-form
+          (save)="onSaveSecret()"
+          #secretForm
+        >
+          <div>
+            You can change/update your
+            <a
+              href="https://ob.nordigen.com/user-secrets/"
+              target="_blank"
+              >Nordigen User Secret</a
+            >
+            here.
+          </div>
+        </nordigen-secret-form>
+      </section>
+    </div>
+  </div>
+</div>

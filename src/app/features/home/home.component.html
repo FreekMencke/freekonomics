@@ -1,0 +1,88 @@
+<header class="jumbotron">
+  <div class="container">
+    <h1
+      class="mt--xxxxl mat-headline-2 text-align--center"
+      [class.mat-display-2]="isMobile | async"
+    >
+      One Overview for All Your Money.
+    </h1>
+    <div class="text-align--center my--xl">
+      <button
+        mat-flat-button
+        routerLink="/setup"
+      >
+        GET STARTED
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="flex flex--wrap flex-align--center home-content">
+    <div class="flex--1 home-content__block text-align--center">
+      <mat-icon>currency_exchange</mat-icon>
+    </div>
+    <div class="flex--1 home-content__block">
+      <h2 class="mat-headline-4 mb--l">Automatically Sync Accounts</h2>
+      <p class="mat-h3">
+        Thanks to the
+        <a
+          href="https://nl.wikipedia.org/wiki/Payment_Services_Directive"
+          target="_blank"
+          >PSD2</a
+        >
+        legislation in europe, the balance of your current accounts can be updated automatically once they have been
+        linked.
+      </p>
+      <p class="mat-h3">
+        Some banks also support linking savings accounts using PSD2. Otherwise you can create custom accounts which can
+        be updated manually.
+      </p>
+    </div>
+  </div>
+
+  <div class="flex flex--wrap flex-align--center home-content">
+    <div class="flex--1 home-content__block">
+      <h2 class="mat-headline-4 mb--l">Track Your Recent Transactions</h2>
+      <p class="mat-h3">You can look up your transactions up to 3 months in the past.</p>
+      <p class="mat-h3">
+        A lot of data involved with transactions is dependant on how well banks have implemented the PSD2 API. This
+        means that the quality in data between banks may differ.
+      </p>
+    </div>
+    <div class="flex--1 home-content__block text-align--center">
+      <mat-icon>receipt_long</mat-icon>
+    </div>
+  </div>
+
+  <div class="flex flex--wrap flex-align--center home-content">
+    <div class="flex--1 home-content__block text-align--center">
+      <mat-icon>verified_user</mat-icon>
+    </div>
+    <div class="flex--1 home-content__block">
+      <h2 class="mat-headline-4 mb--l">Your Data Is Private and Secure</h2>
+      <p class="mat-h3">
+        Freekonomics does not store any of your data remotely. All data is saved locally on your device, ensuring that
+        your information remains private and secure.
+      </p>
+      <p class="mat-h3">
+        For the requisitions of your bank accounts, we use
+        <a
+          href="https://nordigen.com/"
+          target="_blank"
+          >Nordigen</a
+        >. Please read their
+        <a
+          href="https://nordigen.com/en/company/privacy-policy-end-user/"
+          target="_blank"
+          >privacy policy</a
+        >
+        for more information.
+      </p>
+      <p class="mat-h3">
+        We use Google Analytics to anonymously track usage data, which helps us understand how users interact with our
+        service and which features are most popular.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../../styling/variables/spacing';
+
+$typography: mat.define-typography-config();
+
+account-item + :host {
+  margin-top: map.get(spacing.$size, 'm');
+}
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: map.get(spacing.$size, 's');
+
+  border-radius: 4px;
+
+  @include mat.elevation(1);
+
+  background-color: mat.get-color-from-palette(mat.$grey-palette, 800);
+}
+
+body.light-mode :host {
+  background-color: mat.get-color-from-palette(mat.$grey-palette, A100);
+}
+
+::ng-deep {
+  [account-item-avatar] {
+    img {
+      display: block;
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      margin-right: map.get(spacing.$size, 's');
+    }
+  }
+
+  [account-item-content] + [account-item-avatar] {
+    margin-left: map.get(spacing.$size, 'm');
+  }
+
+  [account-item-content] + [account-item-actions] {
+    margin-left: map.get(spacing.$size, 's');
+  }
+
+  [account-item-content] {
+    flex-grow: 1;
+    text-align: right;
+    margin-left: map.get(spacing.$size, 'm');
+
+    [account-item-title] {
+      @include mat.typography-level($typography, 'headline-6');
+      line-height: 28px;
+    }
+
+    [account-item-subtitle] {
+      @include mat.typography-level($typography, 'subtitle-2');
+      line-height: 16px;
+      margin-bottom: map.get(spacing.$size, 'xxs');
+      opacity: 0.8;
+    }
+  }
+}

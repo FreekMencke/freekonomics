@@ -1,0 +1,125 @@
+<div mat-dialog-title>Mortgage</div>
+
+<form
+  [formGroup]="form"
+  autocomplete="off"
+>
+  <div
+    mat-dialog-content
+    class="flex flex--column pb--s"
+  >
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Description</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="description"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Principal</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="principal"
+      />
+      <span
+        matSuffix
+        class="mr--m"
+        >EUR</span
+      >
+    </mat-form-field>
+
+    <div class="flex">
+      <mat-form-field
+        class="mr--s"
+        color="accent"
+        appearance="outline"
+      >
+        <mat-label>Yearly interest</mat-label>
+        <input
+          type="number"
+          step=".01"
+          matInput
+          formControlName="yearlyInterest"
+        />
+        <span
+          matSuffix
+          class="mr--m"
+          >%</span
+        >
+      </mat-form-field>
+
+      <mat-form-field
+        class="ml--s"
+        color="accent"
+        appearance="outline"
+      >
+        <mat-label>Monthly interest</mat-label>
+        <input
+          type="number"
+          step=".0001"
+          matInput
+          formControlName="monthlyInterest"
+        />
+        <span
+          matSuffix
+          class="mr--m"
+          >%</span
+        >
+      </mat-form-field>
+    </div>
+
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>Duration in months</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="durationInMonths"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+    >
+      <mat-label>First payment date</mat-label>
+      <input
+        type="date"
+        matInput
+        formControlName="firstPaymentDate"
+      />
+    </mat-form-field>
+  </div>
+
+  <div
+    mat-dialog-actions
+    align="end"
+  >
+    <button
+      type="button"
+      mat-flat-button
+      color="transparent"
+      (click)="close()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="createOrUpdate()"
+    >
+      {{ this.mortgage ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form>

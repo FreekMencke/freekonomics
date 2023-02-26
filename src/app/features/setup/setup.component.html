@@ -1,0 +1,70 @@
+<header class="jumbotron">
+  <div class="container">
+    <h1 class="my--m mat-display-1">Setup</h1>
+  </div>
+</header>
+
+<div class="container">
+  <div class="my--xl">
+    <p>
+      <span class="mat-body-strong">Freekonomics</span> uses the
+      <a
+        href="https://wikipedia.org/wiki/Payment_Services_Directive"
+        target="_blank"
+        >PSD2 API</a
+      >
+      to connect with your bank accounts so we can create an up-to-date overview of your wealth.
+    </p>
+    <p>
+      There is only one caveat: not all banks, and not all account types support PSD2. We can work around this by
+      letting the user create custom accounts themselves.
+    </p>
+  </div>
+
+  <nordigen-secret-form
+    title="Connect to Nordigen"
+    buttonText="Save and continue"
+    (save)="continue()"
+  >
+    <div>
+      We use
+      <a
+        href="https://nordigen.com/"
+        target="_blank"
+        >Nordigen</a
+      >
+      to easily connect with the PSD2 API. In order to use <span class="mat-body-strong">Freekonomics</span>, you will
+      need an Nordigen account.
+    </div>
+    <ul>
+      <li>
+        To get started with <span class="mat-body-strong">Freekonomics</span>, you first have to create a
+        <a
+          href="https://ob.nordigen.com/"
+          target="_blank"
+          >Nordigen account</a
+        >.
+      </li>
+      <li>
+        After creating an account, you need to create a
+        <a
+          href="https://ob.nordigen.com/user-secrets/"
+          target="_blank"
+          >User Secret</a
+        >.
+      </li>
+    </ul>
+    <div>Please enter the User Secret below. This secret will only be saved on this device to keep it safe.</div>
+  </nordigen-secret-form>
+
+  <div>
+    <p class="mat-caption">
+      Freekonomics itself only stores data on this device, for other concerns about your data, please check your
+      <a
+        href="https://ob.nordigen.com/"
+        target="_blank"
+        >Nordigen account</a
+      >.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<ng-content select="[account-item-icon]"></ng-content>
+<div
+  account-item-content
+  class="text-ellipsis"
+>
+  <ng-content select="[account-item-title]"></ng-content>
+  <ng-content select="[account-item-subtitle]"></ng-content>
+</div>
+<div
+  account-item-avatar
+  *ngIf="institution_id"
+>
+  <img
+    [src]="getBankLogoUrl(institution_id)"
+    [alt]="institution_id"
+  />
+</div>
+
+<ng-content select="[account-item-actions]"></ng-content>

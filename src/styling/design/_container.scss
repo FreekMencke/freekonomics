@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use '../variables/spacing';
+
+.container {
+  margin: auto;
+  max-width: 1280px;
+  width: 100%;
+}
+
+.container__layout {
+  &,
+  .col-2,
+  .col-3 {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: map.get(spacing.$size, 'm');
+  }
+
+  .col-2,
+  .col-3 {
+    flex-direction: column;
+  }
+  .col-2 {
+    min-width: calc(50% - (map.get(spacing.$size, 'm') / 2));
+  }
+  .col-3 {
+    min-width: calc((100% / 3) - map.get(spacing.$size, 'm'));
+  }
+
+  section {
+    width: 100%;
+
+    header {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      margin-bottom: map.get(spacing.$size, 's');
+    }
+  }
+}
