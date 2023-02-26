@@ -1,31 +1,25 @@
-# Psd2Overview
+# Freekonomics
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+Freekonomics is a web application that helps you keep track of your personal finances. It is built with Angular and uses
+the Nordigen API to retrieve account information using **PSD2**.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you
-change any of the source files.
+- Privacy-focused design with all data stored locally.
+- Connect multiple bank accounts to view all balances in one place using **PSD2**.
+- Custom account creation for non-PSD2 accounts or credit cards.
+- Mortgage management, see how much you actually paid off in a glance.
+- Privacy mode that hides all amounts on you dashboard.
+- Dark and light theme.
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use
-`ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You can use Freekonomics by visiting [https://freekonomics.freekmencke.com/](https://freekonomics.freekmencke.com/).
 
-## Build
+## License
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Freekonomics is licensed under the Apache 2.0 license. See the [LICENSE](LICENSE) file for details.
 
-## Running unit tests
+## Contact
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a
-package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the
-[Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+If you have any questions or concerns about Freekonomics, please email freek_mencke.dev@outlook.com.
