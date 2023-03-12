@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "psd2-overview": {
+    "freekonomics": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/psd2-overview",
+            "outputPath": "dist/freekonomics",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "psd2-overview:build:production"
+              "browserTarget": "freekonomics:build:production"
             },
             "development": {
-              "browserTarget": "psd2-overview:build:development",
+              "browserTarget": "freekonomics:build:development",
               "open": true
             }
           },
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "psd2-overview:build"
+            "browserTarget": "freekonomics:build"
           }
         },
         "test": {

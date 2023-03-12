@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "ng build",
-    "predeploy": "ng build",
-    "deploy": "aws s3 sync --delete ./dist/psd2-overview s3://freekonomics.freekmencke.com",
+    "predeploy": "ng build && touch ./dist/freekonomics/robots.txt",
+    "deploy": "aws s3 sync --delete ./dist/freekonomics s3://freekonomics.freekmencke.com",
     "deploy:dryrun": "npm run deploy -- --dryrun",
     "lint": "ng lint",
     "prettier": "prettier --write .",

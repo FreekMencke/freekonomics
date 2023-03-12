@@ -27,7 +27,7 @@ module.exports = function (config) {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/psd2-overview'),
+      dir: require('path').join(__dirname, './coverage/freekonomics'),
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
