@@ -13,6 +13,7 @@ export class CookieBannerService {
     if (this.isCookieBannerShown) return;
 
     this.matDialog.open(CookieBannerComponent, {
+      autoFocus: false,
       width: '100%',
       maxWidth: '500px',
       panelClass: 'cookie-banner',
