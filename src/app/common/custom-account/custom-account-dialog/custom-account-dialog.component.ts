@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { electronicFormatIBAN, isValidIBAN } from 'ibantools';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service';
 import { AppStateModel } from 'src/app/state/app-state.model';
 import { Institution } from '../../nordigen/nordigen.model';
@@ -61,6 +61,7 @@ export class CustomAccountDialogComponent implements OnInit, OnDestroy {
   }
 
   getCountryName(countryCode: string): string {
+    if (countryCode.toLocaleLowerCase().startsWith('x')) return countryCode;
     return this.languageNames.of(countryCode)!;
   }
 

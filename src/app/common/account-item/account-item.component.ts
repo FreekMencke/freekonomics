@@ -14,6 +14,6 @@ export class AccountItemComponent {
     const customInstitution = [...CustomInstitutions, OtherInstitution].find((i) => i.id === institution_id);
     return customInstitution
       ? `${window.origin}/assets/banks/${customInstitution.logo}`
-      : 'https://cdn.nordigen.com/ais/' + institution_id + '.png';
+      : `https://cdn-logos.gocardless.com/ais/${institution_id}.png`;
   }
 }

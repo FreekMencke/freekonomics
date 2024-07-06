@@ -56,13 +56,6 @@ root-layout {
   footer {
     margin-top: map.get(spacing.$size, 'auto');
 
-    // .footer__links {
-    //   background-color: darken(mat.get-color-from-palette(theme.$primary-palette, 500), 10%);
-    //   color: mat.get-contrast-color-from-palette(theme.$primary-palette, 500);
-
-    //   padding: map-get(spacing.$size,  'm');
-    // }
-
     .footer__copyright {
       background-color: mat.get-color-from-palette(theme.$primary-palette, 500);
       color: mat.get-contrast-color-from-palette(theme.$primary-palette, 500);

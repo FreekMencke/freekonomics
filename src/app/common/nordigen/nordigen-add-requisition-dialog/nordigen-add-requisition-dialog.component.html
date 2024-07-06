@@ -15,6 +15,7 @@
 >
   <mat-selection-list
     [multiple]="false"
+    [hideSingleSelectionIndicator]="true"
     (selectionChange)="selectedCountry = $event.options[0].value"
   >
     <div mat-subheader>Countries</div>
@@ -35,7 +36,10 @@
   class="py--none"
   *ngIf="selectedCountry"
 >
-  <mat-selection-list [multiple]="false">
+  <mat-selection-list
+    [multiple]="false"
+    [hideSingleSelectionIndicator]="true"
+  >
     <div mat-subheader>Institutions</div>
     <mat-list-option
       *ngFor="let institution of getCountryInstitutions() | async"
