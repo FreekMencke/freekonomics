@@ -5,7 +5,7 @@
 # Freekonomics
 
 Freekonomics is a web application that helps you keep track of your personal finances. It is built with Angular and uses
-the Nordigen API to retrieve account information using **PSD2**.
+the GoCardless Bank Account Data API to retrieve account information using **PSD2**.
 
 ## Features
 
